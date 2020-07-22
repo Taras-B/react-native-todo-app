@@ -1,6 +1,6 @@
 import { StatusBar } from 'expo-status-bar'
 import React, { useState } from 'react'
-import { StyleSheet, Text, View, FlatList } from 'react-native'
+import { StyleSheet, Text, View, FlatList, Alert } from 'react-native'
 import { Navbar } from './src/components/Navbar'
 import { AddTodo } from './src/components/AddTodo'
 import { Todo } from './src/components/Todo'
@@ -25,7 +25,25 @@ export default function App() {
   }
 
   const removeTodo = (id) => {
-    setTodos((prev) => prev.filter((todo) => todo.id !== id))
+    const todo = todos.find((todo) => todo.id === id)
+    Alert.alert(
+      'Видалення',
+      `Ви справді хочете видалити "${todo.title}"`,
+      [
+        {
+          text: 'Ні',
+          style: 'cancel',
+        },
+        {
+          text: 'Так',
+          onPress: () => {
+            setTodoId(null)
+            setTodos((prev) => prev.filter((todo) => todo.id !== id))
+          },
+        },
+      ],
+      { cancelable: false }
+    )
   }
 
   let content = (
@@ -39,7 +57,13 @@ export default function App() {
 
   if (todoId) {
     const selectTodo = todos.find((todo) => todo.id === todoId)
-    content = <TodoScreen goBack={() => setTodoId(null)} todo={selectTodo} />
+    content = (
+      <TodoScreen
+        onRemove={removeTodo}
+        goBack={() => setTodoId(null)}
+        todo={selectTodo}
+      />
+    )
   }
 
   return (
