@@ -1,22 +1,39 @@
 import { StatusBar } from 'expo-status-bar'
-import React from 'react'
+import React, { useState } from 'react'
 import { StyleSheet, Text, View } from 'react-native'
 import { Navbar } from './src/components/Navbar'
+import { AddTodo } from './src/components/AddTodo'
+import { Todo } from './src/components/Todo'
 
 export default function App() {
+  const [todos, setTodos] = useState([])
+
+  const addTodo = (title) => {
+    setTodos((prev) => [
+      {
+        id: Date.now(),
+        title,
+      },
+      ...prev,
+    ])
+  }
+
   return (
     <View>
       <Navbar />
-      <Text>Open up app! -'Taras</Text>
+      <View style={styles.container}>
+        <AddTodo addTodo={addTodo} />
+        {todos.map((todo) => (
+          <Todo todo={todo} key={todo.id} />
+        ))}
+      </View>
     </View>
   )
 }
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+    paddingHorizontal: 20,
+    paddingVertical: 20,
   },
 })
