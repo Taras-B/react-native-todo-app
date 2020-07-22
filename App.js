@@ -1,6 +1,6 @@
 import { StatusBar } from 'expo-status-bar'
 import React, { useState } from 'react'
-import { StyleSheet, Text, View } from 'react-native'
+import { StyleSheet, Text, View, FlatList } from 'react-native'
 import { Navbar } from './src/components/Navbar'
 import { AddTodo } from './src/components/AddTodo'
 import { Todo } from './src/components/Todo'
@@ -23,9 +23,12 @@ export default function App() {
       <Navbar />
       <View style={styles.container}>
         <AddTodo addTodo={addTodo} />
-        {todos.map((todo) => (
-          <Todo todo={todo} key={todo.id} />
-        ))}
+
+        <FlatList
+          data={todos}
+          renderItem={({ item }) => <Todo todo={item} />}
+          keyExtractor={(item) => item.id.toString()}
+        />
       </View>
     </View>
   )

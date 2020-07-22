@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { StyleSheet, View, Button, TextInput } from 'react-native'
+import { StyleSheet, View, Button, TextInput, Alert } from 'react-native'
 
 export const AddTodo = ({ addTodo }) => {
   const [value, setValue] = useState('')
@@ -8,13 +8,15 @@ export const AddTodo = ({ addTodo }) => {
       addTodo(value)
       setValue('')
     } else {
-      console.log('err')
+      Alert.alert('Введіть текст')
     }
   }
   return (
     <View style={styles.wrapper}>
       <TextInput
         style={styles.input}
+        // TODO: можна скорочений вигляд
+        // onChangeText={setValue(text)}
         onChangeText={(text) => setValue(text)}
         value={value}
         placeholder='Введіть текст'
