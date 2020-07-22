@@ -9,8 +9,8 @@ import TodoScreen from './src/screens/TodoScreen'
 
 export default function App() {
   const [todos, setTodos] = useState([
-    { id: '1', title: 'якась замітка' },
-    { id: '2', title: 'треба щось купити' },
+    // { id: '1', title: 'якась замітка' },
+    // { id: '2', title: 'треба щось купити' },
   ])
   const [todoId, setTodoId] = useState(null)
 
@@ -22,6 +22,15 @@ export default function App() {
       },
       ...prev,
     ])
+  }
+
+  const updateTodo = (id, title) => {
+    setTodos((prev) =>
+      prev.map((todo) => {
+        if (todo.id === id) todo.title = title
+        return todo
+      })
+    )
   }
 
   const removeTodo = (id) => {
@@ -62,6 +71,7 @@ export default function App() {
         onRemove={removeTodo}
         goBack={() => setTodoId(null)}
         todo={selectTodo}
+        updateTodo={updateTodo}
       />
     )
   }
