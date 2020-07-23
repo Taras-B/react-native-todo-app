@@ -1,10 +1,12 @@
 import React from 'react'
-import { View, Text, StyleSheet } from 'react-native'
+import { View, StyleSheet } from 'react-native'
+
+import { AppTextBold } from '../components/ui/AppTextBold'
 
 export const Navbar = () => {
   return (
     <View style={styles.navbar}>
-      <Text style={styles.text}>Todo App</Text>
+      <AppTextBold style={styles.text}>Todo App</AppTextBold>
     </View>
   )
 }
@@ -20,6 +22,6 @@ const styles = StyleSheet.create({
   text: {
     color: 'white',
     fontSize: 20,
-    fontWeight: 'bold',
+    // fontWeight: 'bold',
   },
 })

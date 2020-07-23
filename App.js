@@ -1,18 +1,28 @@
-import { StatusBar } from 'expo-status-bar'
 import React, { useState } from 'react'
-import { StyleSheet, Text, View, FlatList, Alert } from 'react-native'
+
+import { StyleSheet, View, Alert } from 'react-native'
+
+import * as Font from 'expo-font'
+
 import { Navbar } from './src/components/Navbar'
-import { AddTodo } from './src/components/AddTodo'
-import { Todo } from './src/components/Todo'
 import MainScreen from './src/screens/MainScreen'
 import TodoScreen from './src/screens/TodoScreen'
+import { AppLoading } from 'expo'
+
+async function loadApplication() {
+  await Font.loadAsync({
+    'roboto-regular': require('./assets/fonts/Roboto-Regular.ttf'),
+    'roboto-bold': require('./assets/fonts/Roboto-Bold.ttf'),
+  })
+}
 
 export default function App() {
   const [todos, setTodos] = useState([
-    // { id: '1', title: 'якась замітка' },
-    // { id: '2', title: 'треба щось купити' },
+    { id: '1', title: 'якась замітка' },
+    { id: '2', title: 'треба щось купити' },
   ])
   const [todoId, setTodoId] = useState(null)
+  const [isLoading, setIsLoading] = useState(false)
 
   const addTodo = (title) => {
     setTodos((prev) => [
@@ -54,6 +64,15 @@ export default function App() {
       { cancelable: false }
     )
   }
+
+  if (!isLoading)
+    return (
+      <AppLoading
+        startAsync={loadApplication}
+        onError={(err) => console.log('Loading error: ', err)}
+        onFinish={() => setIsLoading(true)}
+      />
+    )
 
   let content = (
     <MainScreen
