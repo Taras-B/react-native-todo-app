@@ -1,9 +1,13 @@
 import React, { useState } from 'react'
-import { StyleSheet, View, Button } from 'react-native'
+import { StyleSheet, View } from 'react-native'
+
+import { AntDesign } from '@expo/vector-icons'
+
 import { THEME } from '../theme'
 import { AppCard } from '../components/ui/AppCard'
 import { EditModal } from '../components/EditModal'
 import { AppTextBold } from '../components/ui/AppTextBold'
+import { AppButton } from '../components/ui/AppButton'
 // import { Todo } from '../components/Todo'
 
 const TodoScreen = ({ goBack, todo, onRemove, updateTodo }) => {
@@ -24,18 +28,20 @@ const TodoScreen = ({ goBack, todo, onRemove, updateTodo }) => {
       />
       <AppCard style={styles.card}>
         <AppTextBold style={styles.title}>{todo.title}</AppTextBold>
-        <Button title='Ред.' onPress={() => setIsModal(true)} />
+        <AppButton onPress={() => setIsModal(true)}>
+          <AntDesign name='edit' size={20} color='#fff' />
+        </AppButton>
       </AppCard>
       <View style={styles.buttons}>
         <View style={styles.button}>
-          <Button title='Назад' onPress={goBack} />
+          <AppButton onPress={goBack}>
+            <AntDesign name='back' size={20} color='#fff' />
+          </AppButton>
         </View>
         <View style={styles.button}>
-          <Button
-            title='Видалити'
-            onPress={() => onRemove(todo.id)}
-            color={THEME.DANGER_COLOR}
-          />
+          <AppButton onPress={() => onRemove(todo.id)} color={THEME.DANGER_COLOR}>
+            <AntDesign name='delete' size={20} color='#fff' />
+          </AppButton>
         </View>
       </View>
     </View>
@@ -48,7 +54,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
   },
   button: {
-    width: '30%',
+    width: '40%',
   },
   title: {
     fontSize: 20,
