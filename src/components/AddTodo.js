@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { StyleSheet, View, Button, TextInput, Alert } from 'react-native'
+import { StyleSheet, View, Button, TextInput, Alert, Keyboard } from 'react-native'
 
 import { AntDesign } from '@expo/vector-icons'
 
@@ -9,6 +9,7 @@ export const AddTodo = ({ addTodo }) => {
     if (value.trim()) {
       addTodo(value)
       setValue('')
+      Keyboard.dismiss()
     } else {
       Alert.alert('Введіть текст')
     }
