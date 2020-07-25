@@ -1,14 +1,19 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { StyleSheet, View, FlatList, Image, Text } from 'react-native'
 import { AddTodo } from '../components/AddTodo'
 import { Todo } from '../components/Todo'
+import { TodoContext } from '../context/todo/todoContext'
+import { ScreenContext } from '../context/screen/screenContext'
 
-const MainScreen = ({ addTodo, todos, removeTodo, openTodo }) => {
+const MainScreen = () => {
+  const { addTodo, removeTodo, todos } = useContext(TodoContext)
+  const { changeScreen } = useContext(ScreenContext)
+
   let content = (
     <FlatList
       data={todos}
       renderItem={({ item }) => (
-        <Todo todo={item} onOpen={openTodo} removeTodo={removeTodo} />
+        <Todo todo={item} onOpen={changeScreen} removeTodo={removeTodo} />
       )}
       keyExtractor={(item) => item.id.toString()}
     />
