@@ -4,6 +4,7 @@ import { AddTodo } from '../components/AddTodo'
 import { Todo } from '../components/Todo'
 import { TodoContext } from '../context/todo/todoContext'
 import { ScreenContext } from '../context/screen/screenContext'
+import { AppText } from '../components/ui/AppText'
 
 const MainScreen = () => {
   const { addTodo, removeTodo, todos } = useContext(TodoContext)
@@ -28,7 +29,7 @@ const MainScreen = () => {
           source={require('../../assets/no-items.png')}
         />
         {/* TODO: добавити стилі  */}
-        <Text>Ще нічого немає</Text>
+        <AppText style={styles.textNotList}>Ще нічого немає</AppText>
       </View>
     )
   }
@@ -47,11 +48,16 @@ const styles = StyleSheet.create({
   imgWrap: {
     alignItems: 'center',
     justifyContent: 'center',
+    marginTop: 40,
     padding: 20,
     height: 300,
   },
   image: {
     width: '100%',
     height: '100%',
+  },
+  textNotList: {
+    marginTop: 20,
+    fontSize: 25,
   },
 })

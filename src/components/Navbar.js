@@ -18,6 +18,8 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     backgroundColor: 'blue',
     paddingTop: 10,
+    borderBottomLeftRadius: 10,
+    borderBottomRightRadius: 10,
   },
   text: {
     color: 'white',
